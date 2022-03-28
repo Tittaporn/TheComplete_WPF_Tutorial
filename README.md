@@ -42,8 +42,18 @@ This project was built by following The Complete WPF Tutorial.
 6) Handling exceptions in WPF
 7) Application Culture / UICulture
 
-### Souces
+### Basic Controls
+1) The TextBlock control - Inline formatting
+2) The Label control
+3) The TextBox control
+4) The Button control
+5) The CheckBox control
+6) The RadioButton control
+7) The PasswordBox control
+8) The Image control
+
+## Souces
 - https://wpf-tutorial.com/
 
-### C# Project by Lee McCormick
+## C# Project by Lee McCormick
 Learning C# is one of my goal in 2022. Enjoy learning it until I am a professional C# developer. This project was built by following the tutorial and source code online.
