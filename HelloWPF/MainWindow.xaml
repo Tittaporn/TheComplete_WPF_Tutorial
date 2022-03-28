@@ -1,0 +1,103 @@
+﻿<Window x:Class="HelloWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HelloWPF"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1200" Width="800">
+    
+    <!-- Add Resources -->
+    <Window.Resources>
+        <sys:String x:Key="strWindow">Hello, WPF Window World!</sys:String>
+        <x:Array x:Key="ComboBoxItems" Type="sys:String">
+            <sys:String>Item #1 WPF</sys:String>
+            <sys:String>Item #2 XAML</sys:String>
+            <sys:String>Item #3 C#</sys:String>
+        </x:Array>
+
+        <LinearGradientBrush x:Key="WindowBackgroundBrush">
+            <GradientStop Offset="0" Color="Silver"/>
+            <GradientStop Offset="1" Color="Gray"/>
+        </LinearGradientBrush>
+    </Window.Resources>
+    
+    <!-- Grid For All Views -->
+    <Grid Name="pnlMainGrid" MouseUp="pnlMainGrid_MouseUp" Background="LightBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="800"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        
+        <!-- Text Hello WPF -->
+        <StackPanel Grid.Row="0">
+            <TextBlock Name="txtHelloWPF"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" Grid.ColumnSpan="2" Margin="0,0,0,0" MouseDown="helloWPF_MouseDown">
+            Hello, WPF!
+            </TextBlock>
+        </StackPanel>
+
+        <!-- Multi Color Button and Handling exceptions Button -->
+        <StackPanel Grid.Row="1" Margin="50"  Orientation="Horizontal">
+            <Button FontWeight="Bold" Width="300">
+                <WrapPanel>
+                    <TextBlock Foreground="Blue">Multi</TextBlock>
+                    <TextBlock Foreground="Red">Color</TextBlock>
+                    <TextBlock>Button</TextBlock>
+                </WrapPanel>
+            </Button>
+
+            <Button FontWeight="Bold" Width="300" Margin="50 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="HandelingExceptionButton_Click">
+                Do something bad and handel it !
+            </Button>
+        </StackPanel>
+
+        <!-- Text Hello WPF With Resources -->
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="{StaticResource strHelloWorld}" FontSize="50" HorizontalAlignment="Center"/>
+            <TextBlock HorizontalAlignment="Center" FontSize="20"> Just another 
+                "<TextBlock Text="{StaticResource strHelloWorld}" FontSize="30"/>" 
+                example, but with resources!</TextBlock>
+        </StackPanel>
+
+        <!-- ComboBox With Resources -->
+        <!-- If you only need a given resource for a specific control, you can make it more local by adding it to this specific control, instead of the window. It works exactly the same way, the only difference being that you can now only access from inside the scope of the control where you put it: -->
+        <StackPanel Grid.Row="3" Margin="10">
+            <StackPanel.Resources>
+                <sys:String x:Key="ComboBoxTitle">Items To Learn:</sys:String>
+            </StackPanel.Resources>
+            <Label Content="{StaticResource ComboBoxTitle}" />
+            <ComboBox ItemsSource="{StaticResource ComboBoxItems}" />
+        </StackPanel>
+
+        <!-- DockPanel With Resources From Application, Window and Panel -->
+        <DockPanel Grid.Row="4" Margin="10" Name="pnlMain">
+            <DockPanel.Resources>
+                <sys:String x:Key="strPanel">Hello, WPF Panel World!</sys:String>
+            </DockPanel.Resources>
+
+            <WrapPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="10">
+                <Button Width="400" Name="btnClickMe" Click="btnClickMe_Click">Click me to see string from many resources in ListBox!</Button>
+            </WrapPanel>
+
+            <ListBox Name="lbResult" />
+        </DockPanel>
+        
+        
+    </Grid>
+</Window>
+
+
+<!-- *** XAML Note *** 
+ * Margin ==> <object Margin="left,top,right,bottom"/>  
+ * F5 ==>  Start debugging or press F5  
+ * Simply press the [Tab] key twice to have Visual Studio generate the correct event handler for you
+-->
