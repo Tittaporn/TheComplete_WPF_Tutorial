@@ -27,6 +27,21 @@ namespace HelloWPF
             InitializeComponent();
             pnlMainGrid.MouseUp += new MouseButtonEventHandler(pnlMainGrid_MouseUp);
             txtHelloWPF.MouseDown += new MouseButtonEventHandler(helloWPF_MouseDown);
+
+            // Formatting text from C#/Code-Behind ==> As you can see, formatting text through XAML is very easy, but in some cases, you might prefer or even need to do it from your C#/Code-Behind file. This is a bit more cumbersome, but here's an example on how you may do it:
+            /* TextBlock tb = new TextBlock();
+            tb.TextWrapping = TextWrapping.Wrap;
+            tb.Margin = new Thickness(10);
+            tb.Inlines.Add("An example on ");
+            tb.Inlines.Add(new Run("the TextBlock control ") { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add("using ");
+            tb.Inlines.Add(new Run("inline ") { FontStyle = FontStyles.Italic });
+            tb.Inlines.Add(new Run("text formatting ") { Foreground = Brushes.Blue });
+            tb.Inlines.Add("from ");
+            tb.Inlines.Add(new Run("Code-Behind") { TextDecorations = TextDecorations.Underline });
+            tb.Inlines.Add(".");
+            this.Content = tb;
+           */
         }
 
         private void pnlMainGrid_MouseUp(object sender, MouseButtonEventArgs e)
@@ -56,7 +71,7 @@ namespace HelloWPF
             lbResult.Items.Add("English(US) : " + largeNumber.ToString("N2", usCulture));
             lbResult.Items.Add("German(DE) : " + largeNumber.ToString("N2", deCulture));
             lbResult.Items.Add("Swedish(SE) : " + largeNumber.ToString("N2", seCulture));
-            
+
             // Handling exceptions in WPF ==> In this case, the user would be forced to close your application, due to such a simple and easily avoided error. So, if you know that things might go wrong, then you should use a try-catch block, like this:
             string s = null;
             try
@@ -90,6 +105,21 @@ namespace HelloWPF
             Thread.CurrentThread.CurrentCulture = new CultureInfo((sender as Button).Tag.ToString());
             lblNumber.Content = (123456789.42d).ToString("N2");
             lblDate.Content = DateTime.Now.ToString();
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            // The Hyperlink is also used inside of WPF Page's, where it can be used to navigate between pages. In that case, you won't have to specifically handle the RequestNavigate event, like we do in the example, but for launching external URL's from a regular WPF application, we need a bit of help from this event and the Process class. We subscribe to the RequestNavigate event, which allows us to launch the linked URL in the users default browser with a simple event handler like this one in the code behind file:
+            System.Diagnostics.Process.Start(e.Uri.AbsoluteUri);
+        }
+
+        private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            // The example consists of two TextBox controls: One for editing and one for outputting the current selection status to. For this, we set the IsReadOnly property to true, to prevent editing of the status TextBox. We subscribe the SelectionChanged event on the first TextBox, which we handle in the Code-behind:
+            TextBox textBox = sender as TextBox;
+            txtStatus.Text = "Selection starts at character #" + textBox.SelectionStart + Environment.NewLine;
+            txtStatus.Text += "Selection is " + textBox.SelectionLength + " character(s) long" + Environment.NewLine;
+            txtStatus.Text += "Selected text: '" + textBox.SelectedText + "'";
         }
     }
 }

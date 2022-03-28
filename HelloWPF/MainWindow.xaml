@@ -46,18 +46,95 @@
         </StackPanel>
 
         <!-- Multi Color Button and Handling exceptions Button -->
-        <StackPanel Grid.Row="1" Margin="50"  Orientation="Horizontal">
-            <Button FontWeight="Bold" Width="300">
-                <WrapPanel>
-                    <TextBlock Foreground="Blue">Multi</TextBlock>
-                    <TextBlock Foreground="Red">Color</TextBlock>
-                    <TextBlock>Button</TextBlock>
-                </WrapPanel>
-            </Button>
+        <StackPanel Grid.Row="1" Margin="20"  Orientation="Horizontal">
+            <StackPanel Width="350"  Orientation="Vertical">
+                <Button  Margin="5 5 5 5" FontWeight="Bold" Width="300">
+                    <WrapPanel>
+                        <TextBlock Foreground="Blue">Multi</TextBlock>
+                        <TextBlock Foreground="Red">Color</TextBlock>
+                        <TextBlock>Button</TextBlock>
+                    </WrapPanel>
+                </Button>
 
-            <Button FontWeight="Bold" Width="300" Margin="50 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="HandelingExceptionButton_Click">
-                Do something bad and handel it !
-            </Button>
+                <Button FontWeight="Bold" Width="300" Margin="5 5 5 5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="HandelingExceptionButton_Click">
+                    Do something bad and handel it !
+                </Button>
+
+                <!-- ComboBox With Resources -->
+                <!-- If you only need a given resource for a specific control, you can make it more local by adding it to this specific control, instead of the window. It works exactly the same way, the only difference being that you can now only access from inside the scope of the control where you put it: -->
+                <StackPanel Margin="10 10 10 10" Background="LightCyan">
+                    <StackPanel.Resources>
+                        <sys:String x:Key="ComboBoxTitle">Items To Learn:</sys:String>
+                    </StackPanel.Resources>
+                    <Label Content="{StaticResource ComboBoxTitle}" />
+                    <ComboBox Margin="10 10 10 10" ItemsSource="{StaticResource ComboBoxItems}" />
+                </StackPanel>
+
+                <!-- The Label control and TextBox control -->
+                <StackPanel Margin="10 10 10 10" Orientation="Vertical" Background="LightCyan">
+            <Label Target="{Binding ElementName=txtName}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_green.png" />
+                        <AccessText Text="_Label Name:" />
+                    </StackPanel>
+                </Label>
+                <TextBox Name="txtName" Width="300" />
+                <Label Target="{Binding ElementName=txtMail}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_blue.png" />
+                        <AccessText Text="_Label Mail:" />
+                    </StackPanel>
+                </Label>
+                <TextBox Name="txtMail" Width="300"  Text="Hello, I am a TextBox With Text" />
+                    <Label Target="{Binding ElementName=txtMultilineTextBox}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_pink.png" />
+                            <AccessText Text="_Label Multi Line and Spell Check TextBox :" />
+                        </StackPanel>
+                    </Label>
+                    <TextBox Margin="0 0 0 10" Name="txtMultiLine" Width="300" AcceptsReturn="True" TextWrapping="Wrap" SpellCheck.IsEnabled="True" Language="en-US" />
+                </StackPanel>
+        </StackPanel>
+
+        <!-- The TextBlock control : Dealing with long strings -->
+            <StackPanel Width="350"  Orientation="Vertical">
+                <TextBlock Margin="10" Foreground="Red">
+			This is a TextBlock control<LineBreak/>
+			with multiple lines of text using LineBreak.
+                </TextBlock>
+                <TextBlock Margin="10" TextTrimming="CharacterEllipsis" Foreground="Green">
+			This is a TextBlock control with text using TextTrimming="CharacterEllipsis" that may not be rendered completely, which will be indicated with an ellipsis.
+                </TextBlock>
+                <TextBlock Margin="10" TextWrapping="Wrap" Foreground="Blue">
+			This is a TextBlock control with automatically wrapped text, using the TextWrapping property ==> TextWrapping="Wrap".
+                </TextBlock>
+                <TextBlock Margin="10" TextWrapping="Wrap">
+			TextBlock with <Bold>bold</Bold>, <Italic>italic</Italic> and <Underline>underlined</Underline> text.
+                </TextBlock>
+                <TextBlock Margin="10" TextWrapping="Wrap">
+			This text has a <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://www.google.com">link</Hyperlink> in it.
+                </TextBlock>
+                <TextBlock Margin="10" TextWrapping="Wrap">
+			This <Span FontWeight="Bold">is</Span> a
+			<Span Background="Silver" Foreground="Maroon">TextBlock</Span>
+			with <Span TextDecorations="Underline">several</Span>
+			<Span FontStyle="Italic">Span</Span> elements,
+			<Span Foreground="Blue">
+				using a <Bold>variety</Bold> of <Italic>styles</Italic>
+			</Span>.
+                </TextBlock>
+
+                <!-- Working with TextBox Section -->
+                <!-- Just like any other editable control in Windows, the TextBox allows for selection of text, e.g. to delete an entire word at once or to copy a piece of the text to the clipboard. The WPF TextBox has several properties for working with selected text, all of them which you can read or even modify. In the next example, we will be reading these properties: -->
+            <StackPanel Background="LightCyan">
+                    <TextBlock Margin="10 5 0 0">Working with TextBox Section</TextBlock>
+            <DockPanel Margin="10">
+                    <TextBox SelectionChanged="TextBox_SelectionChanged" DockPanel.Dock="Top" />
+                    <TextBox Name="txtStatus" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True" />
+
+                </DockPanel>
+            </StackPanel>
+        </StackPanel>
         </StackPanel>
 
         <!-- Text Hello WPF With Resources -->
@@ -68,20 +145,10 @@
                 example, but with resources!</TextBlock>
         </StackPanel>
 
-        <!-- ComboBox With Resources -->
-        <!-- If you only need a given resource for a specific control, you can make it more local by adding it to this specific control, instead of the window. It works exactly the same way, the only difference being that you can now only access from inside the scope of the control where you put it: -->
-        <StackPanel Grid.Row="3" Margin="10">
-            <StackPanel.Resources>
-                <sys:String x:Key="ComboBoxTitle">Items To Learn:</sys:String>
-            </StackPanel.Resources>
-            <Label Content="{StaticResource ComboBoxTitle}" />
-            <ComboBox ItemsSource="{StaticResource ComboBoxItems}" />
-        </StackPanel>
-
         <!-- DockPanel and  Application Culture / UICulture -->
-        <StackPanel  Grid.Row="4" Orientation="Horizontal">
+        <StackPanel  Grid.Row="3" Orientation="Horizontal">
             <!-- DockPanel With Resources From Application, Window and Panel -->
-            <DockPanel Margin="10" Name="pnlMain" Width="400" HorizontalAlignment="Left">
+            <DockPanel Margin="10" Name="pnlMain" Width="400" HorizontalAlignment="Left" Background="LightCyan">
                 <DockPanel.Resources>
                     <sys:String x:Key="strPanel">Hello, WPF Panel World!</sys:String>
                 </DockPanel.Resources>
@@ -90,7 +157,7 @@
                     <Button Width="380" Name="btnClickMe" Click="btnClickMe_Click">Click me to see string from many resources in ListBox!</Button>
                 </WrapPanel>
 
-                <ListBox Name="lbResult" />
+                <ListBox Margin="10" Name="lbResult" />
             </DockPanel>
 
             <!-- StackPanal For  Application Culture / UICulture -->
@@ -119,7 +186,6 @@
 
     </Grid>
 </Window>
-
 
 <!-- *** XAML Note *** 
  * Margin ==> <object Margin="left,top,right,bottom"/>  
