@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
+using System.Globalization;
 
 namespace HelloWPF
 {
@@ -39,10 +41,22 @@ namespace HelloWPF
 
         private void btnClickMe_Click(object sender, RoutedEventArgs e)
         {
+            lbResult.Items.Add("\n");
             lbResult.Items.Add(pnlMain.FindResource("strPanel").ToString());
             lbResult.Items.Add(this.FindResource("strWindow").ToString());
             lbResult.Items.Add(Application.Current.FindResource("strApp").ToString());
-           
+
+            // Ad-hoc formatting ==> If you only need to apply formatting for a specific piece of information, e.g. the contents of a single Label control, you can easily do this, on-the-fly, using a combination of the ToString() method and the CultureInfo class. For instance, in the example above, I applied different, culture-based formatting like this:
+            double largeNumber = 123456789.42;
+            CultureInfo usCulture = new CultureInfo("en-US");
+            CultureInfo deCulture = new CultureInfo("de-DE");
+            CultureInfo seCulture = new CultureInfo("sv-SE");
+            lbResult.Items.Add("\n");
+            lbResult.Items.Add("Large Number With Culture / UICulture :" + largeNumber);
+            lbResult.Items.Add("English(US) : " + largeNumber.ToString("N2", usCulture));
+            lbResult.Items.Add("German(DE) : " + largeNumber.ToString("N2", deCulture));
+            lbResult.Items.Add("Swedish(SE) : " + largeNumber.ToString("N2", seCulture));
+            
             // Handling exceptions in WPF ==> In this case, the user would be forced to close your application, due to such a simple and easily avoided error. So, if you know that things might go wrong, then you should use a try-catch block, like this:
             string s = null;
             try
@@ -68,6 +82,14 @@ namespace HelloWPF
             }
             // Notice that I call the Trim() method an extra time, outside of the try-catch block, so that the first call is handled, while the second is not. For the second one, we need the App.xaml magic ==> DispatcherUnhandledException="Application_DispatcherUnhandledException" :
             s.Trim();
+        }
+
+        private void CultureInfoSwitchButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Dealing with the culture of your WPF application is very important, but fortunately for you, WPF will do a lot of it for you completely out-of-the-box. If you need to change the default behavior, it's quite easy as well, using the CurrentCulture and CurrentUICulture properties, as illustrated in the numerous examples of this article. The interesting part is found in the CultureInfoSwitchButton_Click event, where we set CurrentCulture based on which of the buttons were clicked, and then update the two labels containing a number and a date:
+            Thread.CurrentThread.CurrentCulture = new CultureInfo((sender as Button).Tag.ToString());
+            lblNumber.Content = (123456789.42d).ToString("N2");
+            lblDate.Content = DateTime.Now.ToString();
         }
     }
 }
