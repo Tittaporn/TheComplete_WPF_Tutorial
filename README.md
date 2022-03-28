@@ -41,6 +41,7 @@ This project was built by following The Complete WPF Tutorial.
 5) Resources
 6) Handling exceptions in WPF
 7) Application Culture / UICulture
+![WPF](https://user-images.githubusercontent.com/57606580/160490005-fa19a057-2166-4b99-975b-1e9555db9dbb.PNG)
 
 ### Basic Controls
 1) The TextBlock control - Inline formatting
