@@ -12,7 +12,7 @@ This project was built by following The Complete WPF Tutorial.
 ##### Visual Studio Community 
 - WPF is, as already described, a combination of XAML (markup) and C#/VB.NET/any other .NET language. All of it can be edited in any text editor, even Notepad included in Windows, and then compiled from the command line. However, most developers prefer to use an IDE (Integrated Development Environment), since it makes everything, from writing code to designing the interface and compiling it all so much easier.
 ##### Hello, WPF! 
-'''
+```
 <Window x:Class="WpfApplication1.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -23,11 +23,11 @@ This project was built by following The Complete WPF Tutorial.
         </TextBlock>
     </Grid>
 </Window>
-'''
+```
 
 ### XAML
 ##### What is XAML?
--XAML, which stands for eXtensible Application Markup Language, is Microsoft's variant of XML for describing a GUI. In previous GUI frameworks, like WinForms, a GUI was created in the same language that you would use for interacting with the GUI, e.g. C# or VB.NET and usually maintained by the designer (e.g. Visual Studio), but with XAML, Microsoft is going another way. Much like with HTML, you are able to easily write and edit your GUI.
+- XAML, which stands for eXtensible Application Markup Language, is Microsoft's variant of XML for describing a GUI. In previous GUI frameworks, like WinForms, a GUI was created in the same language that you would use for interacting with the GUI, e.g. C# or VB.NET and usually maintained by the designer (e.g. Visual Studio), but with XAML, Microsoft is going another way. Much like with HTML, you are able to easily write and edit your GUI.
 ##### Basic XAML
 - HTML is not case-sensitive, but XAML is, because the control name has to correspond to a type in the .NET framework. The same goes for attribute names, which corresponds to the properties of the control. Here's a button where we define a couple of properties by adding attributes to the tag:
 ##### Events in XAML
