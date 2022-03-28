@@ -44,14 +44,15 @@ This project was built by following The Complete WPF Tutorial.
 ![WPF](https://user-images.githubusercontent.com/57606580/160490005-fa19a057-2166-4b99-975b-1e9555db9dbb.PNG)
 
 ### Basic Controls
-1) The TextBlock control - Inline formatting
-2) The Label control
-3) The TextBox control
-4) The Button control
-5) The CheckBox control
-6) The RadioButton control
-7) The PasswordBox control
-8) The Image control
+1) The TextBlock control
+2) The TextBlock control - Inline formatting
+3) The Label control
+4) The TextBox control
+5) The Button control
+6) The CheckBox control
+7) The RadioButton control
+8) The PasswordBox control
+9) The Image control
 
 ## Souces
 - https://wpf-tutorial.com/
