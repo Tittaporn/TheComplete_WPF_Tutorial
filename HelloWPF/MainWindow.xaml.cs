@@ -121,6 +121,27 @@ namespace HelloWPF
             txtStatus.Text += "Selection is " + textBox.SelectionLength + " character(s) long" + Environment.NewLine;
             txtStatus.Text += "Selected text: '" + textBox.SelectedText + "'";
         }
+
+        private void HelloButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Hello, Button just clicked !");
+        }
+
+        private void FormattedButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Formatted Button Just Clicked !");
+        }
+
+        private void VariousFormattedButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Various Formatted Button Just Clicked !");
+        }
+
+        private void ImageButton_Click(object sender, RoutedEventArgs e)
+        {
+          //  MessageBox.Show("Image Button Just Clicked !");
+        //  this.NavigationService
+        }
     }
 }
 
