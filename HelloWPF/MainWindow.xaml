@@ -16,11 +16,14 @@
             <sys:String>Item #2 XAML</sys:String>
             <sys:String>Item #3 C#</sys:String>
         </x:Array>
-
         <LinearGradientBrush x:Key="WindowBackgroundBrush">
             <GradientStop Offset="0" Color="Silver"/>
             <GradientStop Offset="1" Color="Gray"/>
         </LinearGradientBrush>
+        <!-- Buttons Padding Globally ==> You can apply the padding globally, either across the entire application or just this specific Window, using a Style (more on styles later). Here's an example where we apply it to the Window, using the Window.Resources property: -->
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Padding" Value="5,2"/>
+        </Style>
     </Window.Resources>
 
     <!-- Grid For All Views -->
@@ -29,37 +32,38 @@
             <ColumnDefinition Width="800"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <!-- Grid.Row="0" Text Hello WPF -->
             <RowDefinition Height="Auto"/>
+            <!-- Grid.Row="1" Text Hello WPF With Resources -->
             <RowDefinition Height="Auto"/>
+            <!-- Grid.Row="2" Buttons + Combo Boxs + Lables + TextBlocks + Culture Controls -->
             <RowDefinition Height="Auto"/>
+            <!-- Grid.Row="3" To Continue...-->
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-
-        <!-- Text Hello WPF -->
+        <!-- Row 0 : Text Hello WPF -->
         <StackPanel Grid.Row="0">
             <TextBlock Name="txtHelloWPF"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" Grid.ColumnSpan="2" Margin="0,0,0,0" MouseDown="helloWPF_MouseDown">
             Hello, WPF!
             </TextBlock>
         </StackPanel>
 
+        <!-- Row 1 : Hello WPF With Resources -->
+        <!-- Text Hello WPF With Resources -->
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="{StaticResource strHelloWorld}" FontSize="50" HorizontalAlignment="Center"/>
+            <TextBlock HorizontalAlignment="Center" FontSize="20"> Just another 
+                "<TextBlock Text="{StaticResource strHelloWorld}" FontSize="30"/>" 
+                example, but with resources!</TextBlock>
+        </StackPanel>
+
+        <!-- Row 2 On Left Side : Culture Controls + Combo Boxs + Lables + DockPanel  -->
         <!-- Multi Color Button and Handling exceptions Button -->
-        <StackPanel Grid.Row="1" Margin="20"  Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Margin="20"  Orientation="Horizontal">
             <StackPanel Width="350"  Orientation="Vertical">
-                <Button  Margin="5 5 5 5" FontWeight="Bold" Width="300">
-                    <WrapPanel>
-                        <TextBlock Foreground="Blue">Multi</TextBlock>
-                        <TextBlock Foreground="Red">Color</TextBlock>
-                        <TextBlock>Button</TextBlock>
-                    </WrapPanel>
-                </Button>
-
-                <Button FontWeight="Bold" Width="300" Margin="5 5 5 5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="HandelingExceptionButton_Click">
-                    Do something bad and handel it !
-                </Button>
-
                 <!-- ComboBox With Resources -->
                 <!-- If you only need a given resource for a specific control, you can make it more local by adding it to this specific control, instead of the window. It works exactly the same way, the only difference being that you can now only access from inside the scope of the control where you put it: -->
                 <StackPanel Margin="10 10 10 10" Background="LightCyan">
@@ -72,20 +76,20 @@
 
                 <!-- The Label control and TextBox control -->
                 <StackPanel Margin="10 10 10 10" Orientation="Vertical" Background="LightCyan">
-            <Label Target="{Binding ElementName=txtName}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_green.png" />
-                        <AccessText Text="_Label Name:" />
-                    </StackPanel>
-                </Label>
-                <TextBox Name="txtName" Width="300" />
-                <Label Target="{Binding ElementName=txtMail}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_blue.png" />
-                        <AccessText Text="_Label Mail:" />
-                    </StackPanel>
-                </Label>
-                <TextBox Name="txtMail" Width="300"  Text="Hello, I am a TextBox With Text" />
+                    <Label Target="{Binding ElementName=txtName}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_green.png" />
+                            <AccessText Text="_Label Name:" />
+                        </StackPanel>
+                    </Label>
+                    <TextBox Name="txtName" Width="300" />
+                    <Label Target="{Binding ElementName=txtMail}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_blue.png" />
+                            <AccessText Text="_Label Mail:" />
+                        </StackPanel>
+                    </Label>
+                    <TextBox Name="txtMail" Width="300"  Text="Hello, I am a TextBox With Text" />
                     <Label Target="{Binding ElementName=txtMultilineTextBox}">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_pink.png" />
@@ -94,10 +98,100 @@
                     </Label>
                     <TextBox Margin="0 0 0 10" Name="txtMultiLine" Width="300" AcceptsReturn="True" TextWrapping="Wrap" SpellCheck.IsEnabled="True" Language="en-US" />
                 </StackPanel>
-        </StackPanel>
 
-        <!-- The TextBlock control : Dealing with long strings -->
+                <!-- Working with TextBox Section -->
+                <!-- Just like any other editable control in Windows, the TextBox allows for selection of text, e.g. to delete an entire word at once or to copy a piece of the text to the clipboard. The WPF TextBox has several properties for working with selected text, all of them which you can read or even modify. In the next example, we will be reading these properties: -->
+                <StackPanel  Margin="10 10 10 10" Background="LightCyan">
+                    <TextBlock  Margin="10 10 10 10">Working with TextBox Section</TextBlock>
+                    <DockPanel Margin="10 10 10 10">
+                        <TextBox SelectionChanged="TextBox_SelectionChanged" DockPanel.Dock="Top" />
+                        <TextBox Name="txtStatus" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True" />
+
+                    </DockPanel>
+                </StackPanel>
+
+                <!-- StackPanal For  Application Culture / UICulture -->
+                <StackPanel Margin="10 10 10 10"  Height="100"  Background="LightCyan">
+                    <Grid Margin="10 0 10 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="200" />
+                        </Grid.ColumnDefinitions>
+                        <Label>Number:</Label>
+                        <Label Name="lblNumber" Grid.Column="1" HorizontalAlignment="Left"/>
+                        <Label Grid.Row="1">Date:</Label>
+                        <Label Name="lblDate" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5 10 5 10">
+                        <Button Tag="en-US" Click="CultureInfoSwitchButton_Click" HorizontalContentAlignment="Stretch">English (US)</Button>
+                        <Button Tag="de-DE" Click="CultureInfoSwitchButton_Click" HorizontalContentAlignment="Stretch" Margin="10,0">German (DE)</Button>
+                        <Button Tag="sv-SE" Click="CultureInfoSwitchButton_Click" HorizontalContentAlignment="Stretch">Swedish (SE)</Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- DockPanel and  Application Culture / UICulture -->
+                <StackPanel Margin="10 10 10 10"  Orientation="Horizontal" Background="LightCyan">
+                    <!-- DockPanel With Resources From Application, Window and Panel -->
+                    <DockPanel   Name="pnlMain" HorizontalAlignment="Center" Background="LightCyan">
+                        <DockPanel.Resources>
+                            <sys:String x:Key="strPanel">Hello, WPF Panel World!</sys:String>
+                        </DockPanel.Resources>
+
+                        <WrapPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="10 10 10 10">
+                            <Button HorizontalAlignment="Center" Name="btnClickMe" Click="btnClickMe_Click">Click me to see string from many resources in ListBox!</Button>
+                        </WrapPanel>
+                        <ListBox Margin="10 10 10 10" Name="lbResult" />
+                    </DockPanel>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Row 2 On Right Side : Buttons + TextBlocks  + CheckBoxs -->
+            <!-- The TextBlock control : Dealing with long strings -->
             <StackPanel Width="350"  Orientation="Vertical">
+                <Button  Margin="5 5 5 5" FontWeight="Bold" Width="300">
+                    <WrapPanel>
+                        <TextBlock Foreground="Blue">Multi</TextBlock>
+                        <TextBlock Foreground="Red">Color</TextBlock>
+                        <TextBlock>Button</TextBlock>
+                    </WrapPanel>
+                </Button>
+                <Button FontWeight="Bold" Width="300" Margin="5 5 5 5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="HandelingExceptionButton_Click">
+                    Do something bad and handel it !
+                </Button>
+
+                <!-- Button Controls -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical" Width="150">
+                        <!-- Button Controls With Normal VS Format Buttons -->
+                        <Button Click="HelloButton_Click" Margin="10" >Hello Button</Button>
+                        <Button Click="FormattedButton_Click" Background="Beige" Foreground="Blue" FontWeight="Bold" Margin="10">Hello Formatted Button</Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Width="150">
+                        <!-- Button Controls With Various Formatted Button -->
+                        <Button Click="VariousFormattedButton_Click" Margin="10">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>Formatted</TextBlock>
+                                <TextBlock Foreground="blue" FontWeight="Bold" Margin="2,0">Button</TextBlock>
+                                <TextBlock Foreground="Gray" FontStyle="Italic"> [Various]</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Button Controls With Image Button -->
+                        <Button Click="ImageButton_Click" Margin="10">
+                            <StackPanel Orientation="Horizontal">
+                                <!--<Image Source="/WpfTutorialSamples;component/Images/help.png" /> BE BACK TO WORK ON IMAGE SOURCE -->
+                                <TextBlock Margin="5,0">Help</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- TextBlock Controls -->
                 <TextBlock Margin="10" Foreground="Red">
 			This is a TextBlock control<LineBreak/>
 			with multiple lines of text using LineBreak.
@@ -121,69 +215,44 @@
 			<Span FontStyle="Italic">Span</Span> elements,
 			<Span Foreground="Blue">
 				using a <Bold>variety</Bold> of <Italic>styles</Italic>
-			</Span>.
+			</Span>
                 </TextBlock>
 
-                <!-- Working with TextBox Section -->
-                <!-- Just like any other editable control in Windows, the TextBox allows for selection of text, e.g. to delete an entire word at once or to copy a piece of the text to the clipboard. The WPF TextBox has several properties for working with selected text, all of them which you can read or even modify. In the next example, we will be reading these properties: -->
-            <StackPanel Background="LightCyan">
-                    <TextBlock Margin="10 5 0 0">Working with TextBox Section</TextBlock>
-            <DockPanel Margin="10">
-                    <TextBox SelectionChanged="TextBox_SelectionChanged" DockPanel.Dock="Top" />
-                    <TextBox Name="txtStatus" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True" />
+                <!-- CheckBox Control -->
+                <!--The IsThreeState property As mentioned, the CheckBox usually corresponds to a boolean value, which means that it only has two states: true or false (on or off). However, since a boolean data type might be nullable, effectively allowing for a third option (true, false or null), the CheckBox control can also support this case. By setting the IsThreeState property to true, the CheckBox will get a third state called "the indeterminate state".A common usage for this is to have a "Enable all" CheckBox, which can control a set of child checkboxes, as well as show their collective state. Our example shows how you may create a list of features that can be toggled on and off, with a common "Enable all" CheckBox in the top:-->
+                <StackPanel Margin="10" Orientation="Vertical">
+                    <Label FontWeight="Bold" HorizontalAlignment="Center">Application Checkbox Options</Label>
+                    <CheckBox HorizontalAlignment="Center" IsThreeState="True" Name="cbCheckAll" Checked="CheckedAllBoxs_CheckedChanged" Unchecked="CheckedAllBoxs_CheckedChanged">Enable ALL CheckBox WPF XAML</CheckBox>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition Width="180" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Name="cb1" Checked="CheckedBox_CheckedChanged" Unchecked="CheckedBox_CheckedChanged" Grid.Row="0">CB1 On R1 C0</CheckBox>
+                        <CheckBox Name="cb2" Checked="CheckedBox_CheckedChanged" Unchecked="CheckedBox_CheckedChanged" Grid.Row="1" IsChecked="True">CB2 On R2 C0</CheckBox>
+                        <CheckBox Name="cb3" Checked="CheckedBox_CheckedChanged" Unchecked="CheckedBox_CheckedChanged" Grid.Row="2">CB3 On R3 C0</CheckBox>
+                        <CheckBox Name="cb4" Checked="CheckedBox_CheckedChanged" Unchecked="CheckedBox_CheckedChanged" Grid.Row="0" Grid.Column="1">
+                            <TextBlock>CB4 Custom <Run Foreground="Green" FontWeight="Bold">On R0C1</Run></TextBlock>
+                        </CheckBox>
+                        <CheckBox Name="cb5" Checked="CheckedBox_CheckedChanged" Unchecked="CheckedBox_CheckedChanged" Grid.Row="1" Grid.Column="1" IsChecked="True">
+                            <WrapPanel>
+                                <TextBlock>CB5 With Image<Run FontWeight="Bold"></Run>On R1C1</TextBlock>
+                                <!--<Image Source="/WpfTutorialSamples;component/Images/question.png" Width="16" Height="16" Margin="5,0" /-->
+                            </WrapPanel>
+                        </CheckBox>
+                        <CheckBox Name="cb6" Checked="CheckedBox_CheckedChanged" Unchecked="CheckedBox_CheckedChanged" Grid.Row="2" Grid.Column="1">
+                            <TextBlock>CB6 Custom <Run Foreground="Blue" FontWeight="Bold" TextDecorations="Underline">WWW.On R2C1</Run></TextBlock>
+                        </CheckBox>
+                    </Grid>
 
-                </DockPanel>
-            </StackPanel>
-        </StackPanel>
-        </StackPanel>
-
-        <!-- Text Hello WPF With Resources -->
-        <StackPanel Grid.Row="2">
-            <TextBlock Text="{StaticResource strHelloWorld}" FontSize="50" HorizontalAlignment="Center"/>
-            <TextBlock HorizontalAlignment="Center" FontSize="20"> Just another 
-                "<TextBlock Text="{StaticResource strHelloWorld}" FontSize="30"/>" 
-                example, but with resources!</TextBlock>
-        </StackPanel>
-
-        <!-- DockPanel and  Application Culture / UICulture -->
-        <StackPanel  Grid.Row="3" Orientation="Horizontal">
-            <!-- DockPanel With Resources From Application, Window and Panel -->
-            <DockPanel Margin="10" Name="pnlMain" Width="400" HorizontalAlignment="Left" Background="LightCyan">
-                <DockPanel.Resources>
-                    <sys:String x:Key="strPanel">Hello, WPF Panel World!</sys:String>
-                </DockPanel.Resources>
-
-                <WrapPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="10">
-                    <Button Width="380" Name="btnClickMe" Click="btnClickMe_Click">Click me to see string from many resources in ListBox!</Button>
-                </WrapPanel>
-
-                <ListBox Margin="10" Name="lbResult" />
-            </DockPanel>
-
-            <!-- StackPanal For  Application Culture / UICulture -->
-            <StackPanel Margin="10 0 10 0" Width="300" Height="100"  Background="LightCyan">
-                <Grid Margin="10 0 10 0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="200" />
-                    </Grid.ColumnDefinitions>
-                    <Label>Number:</Label>
-                    <Label Name="lblNumber" Grid.Column="1" HorizontalAlignment="Left"/>
-                    <Label Grid.Row="1">Date:</Label>
-                    <Label Name="lblDate" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
-                </Grid>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5 10 5 10">
-                    <Button Tag="en-US" Click="CultureInfoSwitchButton_Click" HorizontalContentAlignment="Stretch">English (US)</Button>
-                    <Button Tag="de-DE" Click="CultureInfoSwitchButton_Click" HorizontalContentAlignment="Stretch" Margin="10,0">German (DE)</Button>
-                    <Button Tag="sv-SE" Click="CultureInfoSwitchButton_Click" HorizontalContentAlignment="Stretch">Swedish (SE)</Button>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-
     </Grid>
 </Window>
 
