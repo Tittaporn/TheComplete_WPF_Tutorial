@@ -21,13 +21,8 @@
             <GradientStop Offset="0" Color="Silver"/>
             <GradientStop Offset="1" Color="Gray"/>
         </LinearGradientBrush>
-
-        <!-- Buttons Padding Globally ==> You can apply the padding globally, either across the entire application or just this specific Window, using a Style (more on styles later). Here's an example where we apply it to the Window, using the Window.Resources property: -->
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Padding" Value="5,2"/>
-        </Style>
     </Window.Resources>
-    
+
     <!-- Grid For All Views -->
     <Grid Name="pnlMainGrid" MouseUp="pnlMainGrid_MouseUp" Background="LightBlue">
         <Grid.ColumnDefinitions>
@@ -65,35 +60,7 @@
                     Do something bad and handel it !
                 </Button>
 
-                <!-- Button Controls -->
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <StackPanel Orientation="Vertical" Width="150">
-                        <!-- Button Controls With Normal VS Format Buttons -->
-                        <Button Click="HelloButton_Click" Margin="10" >Hello Button</Button>
-                        <Button Click="FormattedButton_Click" Background="Beige" Foreground="Blue" FontWeight="Bold" Margin="10">Hello Formatted Button</Button>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Width="150">
-                        <!-- Button Controls With Various Formatted Button -->
-                        <Button Click="VariousFormattedButton_Click" Margin="10">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock>Formatted</TextBlock>
-                                <TextBlock Foreground="blue" FontWeight="Bold" Margin="2,0">Button</TextBlock>
-                                <TextBlock Foreground="Gray" FontStyle="Italic"> [Various]</TextBlock>
-                            </StackPanel>
-                        </Button>
-
-                        <!-- Button Controls With Image Button -->
-                        <Button Click="ImageButton_Click" Margin="10">
-                        <StackPanel Orientation="Horizontal">
-                            <!--<Image Source="/WpfTutorialSamples;component/Images/help.png" /> BE BACK TO WORK ON IMAGE SOURCE -->
-                            <TextBlock Margin="5,0">Help</TextBlock>
-                        </StackPanel>
-                        </Button>
-                    </StackPanel>
-                </StackPanel>    
-
-                    <!-- ComboBox With Resources -->
+                <!-- ComboBox With Resources -->
                 <!-- If you only need a given resource for a specific control, you can make it more local by adding it to this specific control, instead of the window. It works exactly the same way, the only difference being that you can now only access from inside the scope of the control where you put it: -->
                 <StackPanel Margin="10 10 10 10" Background="LightCyan">
                     <StackPanel.Resources>
@@ -105,20 +72,20 @@
 
                 <!-- The Label control and TextBox control -->
                 <StackPanel Margin="10 10 10 10" Orientation="Vertical" Background="LightCyan">
-                    <Label Target="{Binding ElementName=txtName}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_green.png" />
-                            <AccessText Text="_Label Name:" />
-                        </StackPanel>
-                    </Label>
-                    <TextBox Name="txtName" Width="300" />
-                    <Label Target="{Binding ElementName=txtMail}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_blue.png" />
-                            <AccessText Text="_Label Mail:" />
-                        </StackPanel>
-                    </Label>
-                    <TextBox Name="txtMail" Width="300"  Text="Hello, I am a TextBox With Text" />
+            <Label Target="{Binding ElementName=txtName}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_green.png" />
+                        <AccessText Text="_Label Name:" />
+                    </StackPanel>
+                </Label>
+                <TextBox Name="txtName" Width="300" />
+                <Label Target="{Binding ElementName=txtMail}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_blue.png" />
+                        <AccessText Text="_Label Mail:" />
+                    </StackPanel>
+                </Label>
+                <TextBox Name="txtMail" Width="300"  Text="Hello, I am a TextBox With Text" />
                     <Label Target="{Binding ElementName=txtMultilineTextBox}">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_pink.png" />
@@ -127,9 +94,9 @@
                     </Label>
                     <TextBox Margin="0 0 0 10" Name="txtMultiLine" Width="300" AcceptsReturn="True" TextWrapping="Wrap" SpellCheck.IsEnabled="True" Language="en-US" />
                 </StackPanel>
-            </StackPanel>
+        </StackPanel>
 
-            <!-- The TextBlock control : Dealing with long strings -->
+        <!-- The TextBlock control : Dealing with long strings -->
             <StackPanel Width="350"  Orientation="Vertical">
                 <TextBlock Margin="10" Foreground="Red">
 			This is a TextBlock control<LineBreak/>
@@ -159,15 +126,15 @@
 
                 <!-- Working with TextBox Section -->
                 <!-- Just like any other editable control in Windows, the TextBox allows for selection of text, e.g. to delete an entire word at once or to copy a piece of the text to the clipboard. The WPF TextBox has several properties for working with selected text, all of them which you can read or even modify. In the next example, we will be reading these properties: -->
-                <StackPanel Background="LightCyan">
+            <StackPanel Background="LightCyan">
                     <TextBlock Margin="10 5 0 0">Working with TextBox Section</TextBlock>
-                    <DockPanel Margin="10">
-                        <TextBox SelectionChanged="TextBox_SelectionChanged" DockPanel.Dock="Top" />
-                        <TextBox Name="txtStatus" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True" />
+            <DockPanel Margin="10">
+                    <TextBox SelectionChanged="TextBox_SelectionChanged" DockPanel.Dock="Top" />
+                    <TextBox Name="txtStatus" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True" />
 
-                    </DockPanel>
-                </StackPanel>
+                </DockPanel>
             </StackPanel>
+        </StackPanel>
         </StackPanel>
 
         <!-- Text Hello WPF With Resources -->
