@@ -56,6 +56,12 @@ This project was built by following The Complete WPF Tutorial.
 
 ![WPFFinishedControlChaptter](https://user-images.githubusercontent.com/57606580/161629470-172f39d3-4387-4317-998e-642002ec8aff.JPG)
 
+### Control Concepts
+1) Control ToolTips
+2) WPF Text Rendering
+3) Tab Order
+4) Access Keys
+
 ## Souces
 - https://wpf-tutorial.com/
 
