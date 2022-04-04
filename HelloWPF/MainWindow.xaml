@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HelloWPF"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1800" Width="800">
+        Title="MainWindow" Height="1800" Width="1800">
 
     <!-- Add Resources -->
     <Window.Resources>
@@ -30,17 +30,15 @@
     <Grid Name="pnlMainGrid" MouseUp="pnlMainGrid_MouseUp" Background="LightBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="800"/>
+            <!-- Grid.Column="1" Images Controls -->
+            <ColumnDefinition Width="1000"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <!-- Grid.Row="0" Text Hello WPF -->
             <RowDefinition Height="Auto"/>
             <!-- Grid.Row="1" Text Hello WPF With Resources -->
             <RowDefinition Height="Auto"/>
-            <!-- Grid.Row="2" Images Controls With Stretch -->
-            <RowDefinition Height="Auto"/>
-            <!-- Grid.Row="3" Images Controls -->
-            <RowDefinition Height="Auto"/>
-            <!-- Grid.Row="4" Buttons + Combo Boxs + Lables + TextBlocks + Culture Controls -->
+            <!-- Grid.Row="2" Buttons + Combo Boxs + Lables + TextBlocks + Culture Controls -->
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -49,60 +47,27 @@
             <TextBlock Name="txtHelloWPF"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Grid.ColumnSpan="2" Margin="0,0,0,0" MouseDown="helloWPF_MouseDown">
             Hello, WPF!
             </TextBlock>
+            <!--WPF text rendering ==> Using the TextFormattingMode property, you get to decide which algorithm should be used when formatting the text. You can choose between Ideal (the default value) and Display. You would normally want to leave this property untouched, since the Ideal setting will be best for most situations, but in cases where you need to render very small text, the Display setting can sometimes yield a better result. Here's an example where you can see the difference (although it's very subtle): -->
+            <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label TextOptions.TextFormattingMode="Ideal" FontSize="9">Ideal, small text</Label>
+                <Label TextOptions.TextFormattingMode="Display" FontSize="9">Display, small text</Label>
+                <Label TextOptions.TextFormattingMode="Ideal" FontSize="20">TextFormattingMode.Ideal:large</Label>
+                <Label TextOptions.TextFormattingMode="Display" FontSize="20">TextFormattingMode.Display:large</Label>
+            </StackPanel>
         </StackPanel>
 
         <!-- Row 1 : Hello WPF With Resources -->
         <!-- Text Hello WPF With Resources -->
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="{StaticResource strHelloWorld}" FontSize="20" HorizontalAlignment="Center"/>
             <TextBlock HorizontalAlignment="Center" FontSize="10"> Just another 
                 "<TextBlock Text="{StaticResource strHelloWorld}" FontSize="15"/>" 
                 example, but with resources!</TextBlock>
         </StackPanel>
-
-        <!-- Row 2 : Image Controls With Stretch -->
-        <StackPanel Grid.Row="2" >
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Label Grid.Column="0" HorizontalAlignment="Center" FontWeight="Bold">Uniform</Label>
-                <Label Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold">UniformToFill</Label>
-                <Label Grid.Column="2" HorizontalAlignment="Center" FontWeight="Bold">Fill</Label>
-                <Label Grid.Column="3" HorizontalAlignment="Center" FontWeight="Bold">None</Label>
-                <Image Source="/Resources/tiger.png" Stretch="Uniform" Grid.Column="0" Grid.Row="1" Margin="5" />
-                <Image Source="/Resources/tiger.png" Stretch="UniformToFill" Grid.Column="1" Grid.Row="1" Margin="5" />
-                <Image Source="/Resources/tiger.png" Stretch="Fill" Grid.Column="2" Grid.Row="1" Margin="5" />
-                <Image Source="/Resources/tiger.png" Stretch="None" Grid.Column="3" Grid.Row="1" Margin="5" />
-            </Grid>
-        </StackPanel>
-
-        <!-- Row 3 : Image Controls -->
-        <!-- The Image control ==> The WPF Image control will allow you to display images inside your applications. It's a very versatile control, with many useful options and methods, as you will learn in this article. But first, let's see the most basic example of including an image inside a Window:-->
-        <StackPanel Height="200" Grid.Row="3" Margin="10 10 10 10"  Orientation="Horizontal" HorizontalAlignment="Center">
-            <!--<Image Width="300" Source="/Resources/tiger_test.JPG" /> NEED TO DEBUG NOT SURE HOW TO GET IMAGE FROM PROJECT, IT NOT LOADING....-->
-            <Image Width="300"  Source="https://wpf-tutorial.com/Images/ArticleImages/1/basic-controls/image_control_basic_url.png" />
-            <StackPanel HorizontalAlignment="Center">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                    <Button Margin="10 10 10 10" Click="BtnLoadImageFromResource_Click">Load Image From Resource</Button>
-                    <Button Margin="10 10 10 10" Click="BtnLoadImageFromFile_Click">Load Image From File</Button>
-                </StackPanel>
-                <StackPanel>
-                    <Image x:Name="imageTest" Width="300"  Source="https://wpf-tutorial.com/Images/ArticleImages/1/basic-controls/image_control_basic_url.png" />
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
-
-        <!-- Row 4 On Left Side : Culture Controls + Combo Boxs + Lables + DockPanel  -->
+        
+        <!-- Row 2 On Left Side : Culture Controls + Combo Boxs + Lables + DockPanel  -->
         <!-- Multi Color Button and Handling exceptions Button -->
-        <StackPanel Grid.Row="4" Margin="20"  Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Margin="20"  Orientation="Horizontal">
             <StackPanel Width="350"  Orientation="Vertical">
                 <!-- ComboBox With Resources -->
                 <!-- If you only need a given resource for a specific control, you can make it more local by adding it to this specific control, instead of the window. It works exactly the same way, the only difference being that you can now only access from inside the scope of the control where you put it: -->
@@ -205,15 +170,37 @@
             <!-- Row 3 On Right Side : Buttons + TextBlocks  + CheckBoxs -->
             <!-- The TextBlock control : Dealing with long strings -->
             <StackPanel Width="350"  Orientation="Vertical">
-                <Button  Margin="5 5 5 5" FontWeight="Bold" Width="300">
+                <!-- Add ToolTip On Buttons -->
+                <!-- Tooltips, infotips or hints - various names, but the concept remains the same: The ability to get extra information about a specific control or link by hovering the mouse over it. WPF obviously supports this concept as well, and by using the ToolTip property found on the FrameworkElement class, which almost any WPF control inherits from.-->
+                <Button  Margin="5 5 5 5" FontWeight="Bold" Width="300" ToolTip="This is a toolTip, adjust the message here.. Click here to say hello WPF !"
+                         ToolTipService.ShowDuration="5000"
+                         ToolTipService.HasDropShadow="True"
+                         ToolTipService.ShowOnDisabled="False">
                     <WrapPanel>
                         <TextBlock Foreground="Blue">Multi</TextBlock>
                         <TextBlock Foreground="Red">Color</TextBlock>
                         <TextBlock>Button</TextBlock>
                     </WrapPanel>
                 </Button>
-                <Button FontWeight="Bold" Width="300" Margin="5 5 5 5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="HandelingExceptionButton_Click">
+
+                <!-- Add ToolTip On Buttons -->
+                <Button FontWeight="Bold" Width="300" Margin="5 5 5 5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="HandelingExceptionButton_Click" ToolTipService.ShowDuration="5000">
                     Do something bad and handel it !
+                    <Button.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">Click Here For Doing Bad Thing !</TextBlock>
+                            <TextBlock>
+                        This is another example of Custom ToolTip on a Button
+                        <LineBreak />
+                        If your click here the app will almost crash, but we got handler exception by showing alert message.
+                            </TextBlock>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                            <WrapPanel>
+                                <!--<Image Source="/WpfTutorialSamples;component/Images/help.png" Margin="0,0,5,0" /> NEED TO FIGURE OUT HOW TO USE IMAGE-->
+                                <TextBlock FontStyle="Italic">Press something for more test</TextBlock>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Button.ToolTip>
                 </Button>
 
                 <!-- Button Controls -->
@@ -340,6 +327,89 @@
                         </RadioButton>
                     </StackPanel>
                 </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Row 0 Column 1 : Image Controls With Stretch -->
+        <StackPanel Grid.Row="0" Grid.Column="1" Background="LightCyan" Margin="10 10 10 10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" HorizontalAlignment="Center" FontWeight="Bold">Uniform Stretch Image</Label>
+                <Label Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold">UniformToFill Stretch Image</Label>
+                <Label Grid.Column="2" HorizontalAlignment="Center" FontWeight="Bold">Fill Stretch Image</Label>
+                <Label Grid.Column="3" HorizontalAlignment="Center" FontWeight="Bold">None Stretch Image</Label>
+                <Image Source="/Resources/tiger.png" Stretch="Uniform" Grid.Column="0" Grid.Row="1" Margin="5" />
+                <Image Source="/Resources/tiger.png" Stretch="UniformToFill" Grid.Column="1" Grid.Row="1" Margin="5" />
+                <Image Source="/Resources/tiger.png" Stretch="Fill" Grid.Column="2" Grid.Row="1" Margin="5" />
+                <Image Source="/Resources/tiger.png" Stretch="None" Grid.Column="3" Grid.Row="1" Margin="5" />
+            </Grid>
+        </StackPanel>
+
+        <!-- Row 1 Column 1 : Image Controls -->
+        <!-- The Image control ==> The WPF Image control will allow you to display images inside your applications. It's a very versatile control, with many useful options and methods, as you will learn in this article. But first, let's see the most basic example of including an image inside a Window:-->
+        <StackPanel Grid.Row="1" Grid.Column="1" Height="200"  Margin="10 10 10 10"  Orientation="Horizontal" HorizontalAlignment="Center" >
+            <!--<Image Width="300" Source="/Resources/tiger_test.JPG" /> NEED TO DEBUG NOT SURE HOW TO GET IMAGE FROM PROJECT, IT NOT LOADING....-->
+            <Image Width="300"  Source="https://wpf-tutorial.com/Images/ArticleImages/1/basic-controls/image_control_basic_url.png" />
+            <StackPanel HorizontalAlignment="Center" Background="LightCyan">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <Button Margin="10 10 10 10" Click="BtnLoadImageFromResource_Click">Load Image From Resource</Button>
+                    <Button Margin="10 10 10 10" Click="BtnLoadImageFromFile_Click">Load Image From File</Button>
+                </StackPanel>
+                <StackPanel>
+                    <Image VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Stretch="UniformToFill" x:Name="imageTest" Width="300" Height="130" Source="https://wpf-tutorial.com/Images/ArticleImages/1/basic-controls/image_control_basic_url.png" />
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Row 1 Column 1 : Tab Order -->
+            <!-- This dialog consists of a Grid, split in the middle, with StackPanel's on each side, containing labels and textboxes. The default tab order behavior is to start with the first control of the Window and then tab through each of the child controls found within it, before moving to the next control. Since the dialog consists of vertically oriented StackPanels, that would mean that we would start in the First name field and then move to the Street name field and then the City field, before moving to StackPanel number two, containing the fields for Last name and Zip code. When tabbing out of the second StackPanel, the two buttons would finally be reached. However, for this dialog, that's not the behavior I want. Instead I want to tab from First name to Last name (so basically moving horizontally instead of vertically), and on top of that, I don't want to enter the City field when tabbing through the form, because that will be automatically filled based on the Zip code in this imaginary dialog and has therefore been made readonly. To accomplish all of this, I will use two properties: TabIndex and IsTabStop. TabIndex is used to define the order, while the IsTabStop property will force WPF to skip a control when tabbing through the Window. Here's the markup used to create the dialog: -->
+            <StackPanel  Margin="20 0 0 0" Background="LightCyan">
+                <Grid Margin="10" Background="LightCyan">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Margin="5 5 5 5">
+                        <Label>First name:</Label>
+                        <TextBox TabIndex="0" />
+                        <Label>Street name:</Label>
+                        <TextBox TabIndex="2" />
+                        <Label>City:</Label>
+                        <TextBox TabIndex="5" IsReadOnly="True" IsTabStop="False" Background="Gainsboro" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Margin="5 5 5 5">
+                        <Label>Last name:</Label>
+                        <TextBox TabIndex="1" />
+                        <Label>Zip Code:</Label>
+                        <TextBox TabIndex="4" />
+                    </StackPanel>
+                    <Button Margin="5 5 5 5" Grid.Row="1" HorizontalAlignment="Right" Width="80">TapOrder</Button>
+                    <Button Margin="5 5 5 5" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Width="80">TapOrder</Button>
+                </Grid>
+            </StackPanel>
+
+            <!-- Access Keys -->
+            <!--Tying together two controls ==> In the examples we have seen so far, we have been able to define the Access Key directly on the control we want to reach. But there's at least one example where this isn't directly possible: When you have an input control, e.g. a TextBox, the text that indicate its purpose doesn't exist within the actual TextBox control. Instead, you would usually use a second control to indicate, with text, the purpose of the TextBox control. This would usually be a Label control. So, in this example, the Label control would then hold the descriptive text, and therefore also the Access Key, but the control you want to give attention to would be the TextBox control. No problem - we can use the Target property of the Label to tie it together with the TextBox (or any other control), like this: Notice how the Access Key is specified for the Label controls and then tied to the relevant TextBox control using the Target property, where we use an ElementName based Binding to do the actual work. Now we can access the two TextBox controls using Alt+F and Alt+L, and the Button with Alt+S. Here's how it looks:-->
+            <StackPanel Margin="20 0 0 0" Background="LightCyan">
+                <TextBlock Margin="5" HorizontalAlignment="Center" FontWeight="Bold">Access Key</TextBlock>
+                <Label Content="_First name:" Target="{Binding ElementName=txtFirstName}" />
+                <TextBox Margin="5" Name="txtFirstName" />
+                <Label Content="_Last name:" Target="{Binding ElementName=txtLastName}" />
+                <TextBox Margin="5" Name="txtLastName" />
+                <Button Content="_Save" Margin="20"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>
