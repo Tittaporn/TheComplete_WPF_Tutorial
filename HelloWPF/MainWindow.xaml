@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HelloWPF"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1200" Width="800">
+        Title="MainWindow" Height="1800" Width="800">
 
     <!-- Add Resources -->
     <Window.Resources>
@@ -36,17 +36,17 @@
             <RowDefinition Height="Auto"/>
             <!-- Grid.Row="1" Text Hello WPF With Resources -->
             <RowDefinition Height="Auto"/>
-            <!-- Grid.Row="2" Buttons + Combo Boxs + Lables + TextBlocks + Culture Controls -->
+            <!-- Grid.Row="2" Images Controls With Stretch -->
             <RowDefinition Height="Auto"/>
-            <!-- Grid.Row="3" To Continue...-->
+            <!-- Grid.Row="3" Images Controls -->
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <!-- Grid.Row="4" Buttons + Combo Boxs + Lables + TextBlocks + Culture Controls -->
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Row 0 : Text Hello WPF -->
         <StackPanel Grid.Row="0">
-            <TextBlock Name="txtHelloWPF"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" Grid.ColumnSpan="2" Margin="0,0,0,0" MouseDown="helloWPF_MouseDown">
+            <TextBlock Name="txtHelloWPF"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Grid.ColumnSpan="2" Margin="0,0,0,0" MouseDown="helloWPF_MouseDown">
             Hello, WPF!
             </TextBlock>
         </StackPanel>
@@ -54,15 +54,55 @@
         <!-- Row 1 : Hello WPF With Resources -->
         <!-- Text Hello WPF With Resources -->
         <StackPanel Grid.Row="1">
-            <TextBlock Text="{StaticResource strHelloWorld}" FontSize="50" HorizontalAlignment="Center"/>
-            <TextBlock HorizontalAlignment="Center" FontSize="20"> Just another 
-                "<TextBlock Text="{StaticResource strHelloWorld}" FontSize="30"/>" 
+            <TextBlock Text="{StaticResource strHelloWorld}" FontSize="20" HorizontalAlignment="Center"/>
+            <TextBlock HorizontalAlignment="Center" FontSize="10"> Just another 
+                "<TextBlock Text="{StaticResource strHelloWorld}" FontSize="15"/>" 
                 example, but with resources!</TextBlock>
         </StackPanel>
 
-        <!-- Row 2 On Left Side : Culture Controls + Combo Boxs + Lables + DockPanel  -->
+        <!-- Row 2 : Image Controls With Stretch -->
+        <StackPanel Grid.Row="2" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" HorizontalAlignment="Center" FontWeight="Bold">Uniform</Label>
+                <Label Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold">UniformToFill</Label>
+                <Label Grid.Column="2" HorizontalAlignment="Center" FontWeight="Bold">Fill</Label>
+                <Label Grid.Column="3" HorizontalAlignment="Center" FontWeight="Bold">None</Label>
+                <Image Source="/Resources/tiger.png" Stretch="Uniform" Grid.Column="0" Grid.Row="1" Margin="5" />
+                <Image Source="/Resources/tiger.png" Stretch="UniformToFill" Grid.Column="1" Grid.Row="1" Margin="5" />
+                <Image Source="/Resources/tiger.png" Stretch="Fill" Grid.Column="2" Grid.Row="1" Margin="5" />
+                <Image Source="/Resources/tiger.png" Stretch="None" Grid.Column="3" Grid.Row="1" Margin="5" />
+            </Grid>
+        </StackPanel>
+
+        <!-- Row 3 : Image Controls -->
+        <!-- The Image control ==> The WPF Image control will allow you to display images inside your applications. It's a very versatile control, with many useful options and methods, as you will learn in this article. But first, let's see the most basic example of including an image inside a Window:-->
+        <StackPanel Height="200" Grid.Row="3" Margin="10 10 10 10"  Orientation="Horizontal" HorizontalAlignment="Center">
+            <!--<Image Width="300" Source="/Resources/tiger_test.JPG" /> NEED TO DEBUG NOT SURE HOW TO GET IMAGE FROM PROJECT, IT NOT LOADING....-->
+            <Image Width="300"  Source="https://wpf-tutorial.com/Images/ArticleImages/1/basic-controls/image_control_basic_url.png" />
+            <StackPanel HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <Button Margin="10 10 10 10" Click="BtnLoadImageFromResource_Click">Load Image From Resource</Button>
+                    <Button Margin="10 10 10 10" Click="BtnLoadImageFromFile_Click">Load Image From File</Button>
+                </StackPanel>
+                <StackPanel>
+                    <Image x:Name="imageTest" Width="300"  Source="https://wpf-tutorial.com/Images/ArticleImages/1/basic-controls/image_control_basic_url.png" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Row 4 On Left Side : Culture Controls + Combo Boxs + Lables + DockPanel  -->
         <!-- Multi Color Button and Handling exceptions Button -->
-        <StackPanel Grid.Row="2" Margin="20"  Orientation="Horizontal">
+        <StackPanel Grid.Row="4" Margin="20"  Orientation="Horizontal">
             <StackPanel Width="350"  Orientation="Vertical">
                 <!-- ComboBox With Resources -->
                 <!-- If you only need a given resource for a specific control, you can make it more local by adding it to this specific control, instead of the window. It works exactly the same way, the only difference being that you can now only access from inside the scope of the control where you put it: -->
@@ -133,6 +173,19 @@
                     </StackPanel>
                 </StackPanel>
 
+                <!-- The PasswordBox control -->
+                <!-- PasswordBox and binding ==> When you need to obtain the password from the PasswordBox, you can use the Password property from Code-behind. However, for security reasons, the Password property is not implemented as a dependency property, which means that you can't bind to it. This may or may not be important to you - as already stated, you can still read the password from Code-behind, but for MVVM implementations or if you just love data bindings, a workaround has been developed. You can read much more about it here: http://blog.functionalfun.net/2008/06/wpf-passwordbox-and-data-binding.html -->
+                <StackPanel Margin="10 10 10 10"  Background="LightCyan">
+                    <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label HorizontalAlignment="Right" Width="80">Text :</Label>
+                        <TextBox Width="200"/>
+                    </StackPanel>
+                    <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label HorizontalAlignment="Right" Width="80">Password :</Label>
+                        <PasswordBox Width="200" PasswordChar="*" MaxLength="10"/>
+                    </StackPanel>
+                </StackPanel>
+
                 <!-- DockPanel and  Application Culture / UICulture -->
                 <StackPanel Margin="10 10 10 10"  Orientation="Horizontal" Background="LightCyan">
                     <!-- DockPanel With Resources From Application, Window and Panel -->
@@ -149,7 +202,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <!-- Row 2 On Right Side : Buttons + TextBlocks  + CheckBoxs -->
+            <!-- Row 3 On Right Side : Buttons + TextBlocks  + CheckBoxs -->
             <!-- The TextBlock control : Dealing with long strings -->
             <StackPanel Width="350"  Orientation="Vertical">
                 <Button  Margin="5 5 5 5" FontWeight="Bold" Width="300">
@@ -249,7 +302,43 @@
                             <TextBlock>CB6 Custom <Run Foreground="Blue" FontWeight="Bold" TextDecorations="Underline">WWW.On R2C1</Run></TextBlock>
                         </CheckBox>
                     </Grid>
+                </StackPanel>
 
+                <!-- Radio Button Controls -->
+                <!-- The RadioButton control allows you to give your user a list of possible options, with only one of them selected at the same time. You can achieve the same effect, using less space, with the ComboBox control, but a set of radio buttons tend to give the user a better overview of the options they have. -->
+                <StackPanel Margin="10" HorizontalAlignment="Center">
+                    <Label FontWeight="Bold">Radio Buttons With 2 Groups, Are you ready?</Label>
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Width="60" GroupName="ready">Yes</RadioButton>
+                        <RadioButton Width="60" GroupName="ready" IsChecked="True">No</RadioButton>
+                        <!--With the GroupName property set on each of the radio buttons, a selection can now be made for each of the two groups. Without this, only one selection for all six radio buttons would be possible.-->
+                        <RadioButton Width="60" GroupName="sex">Male</RadioButton>
+                        <RadioButton Width="60" GroupName="sex">Female</RadioButton>
+                        <RadioButton Width="70" GroupName="sex" IsChecked="True">Not Sure</RadioButton>
+                    </StackPanel>
+                    <!-- Radio Buttons With custom content -->
+                    <!-- The RadioButton inherits from the ContentControl class, which means that it can take custom content and display next to it. If you just specify a piece of text, like I did in the example above, WPF will put it inside a TextBlock control and display it, but this is just a shortcut to make things easier for you. You can use any type of control inside of it, as we'll see in the next example: -->
+                    <StackPanel Orientation="Horizontal">
+                        <Label FontWeight="Bold" Width="100">Custom Radio :</Label>
+                        <RadioButton Margin="0 5 0 0" GroupName="custom">
+                            <WrapPanel Width="60">
+                                <!--  <Image Source="/HelloWPF;component/Images/accept.png" Width="16" Height="16" Margin="0,0,5,0" /-->
+                                <TextBlock Text="Yes" Foreground="Green"/>
+                            </WrapPanel>
+                        </RadioButton>
+                        <RadioButton Margin="0 5 0 0"  GroupName="custom">
+                            <WrapPanel Width="60">
+                                <!--  <Image Source="/HelloWPF;component/Images/accept.png" Width="16" Height="16" Margin="0,0,5,0" /-->
+                                <TextBlock Text="No" Foreground="Red"/>
+                            </WrapPanel>
+                        </RadioButton>
+                        <RadioButton Margin="0 5 0 0"  GroupName="custom" IsChecked="True">
+                            <WrapPanel  Width="60">
+                                <!--  <Image Source="/HelloWPF;component/Images/accept.png" Width="16" Height="16" Margin="0,0,5,0" /-->
+                                <TextBlock Text="Maybe" Foreground="Gray"/>
+                            </WrapPanel>
+                        </RadioButton>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

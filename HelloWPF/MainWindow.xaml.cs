@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 using System.Globalization;
+using Microsoft.Win32;
 
 namespace HelloWPF
 {
@@ -159,6 +160,22 @@ namespace HelloWPF
             cb4.IsChecked = newVal;
             cb5.IsChecked = newVal;
             cb6.IsChecked = newVal;
+        }
+
+        private void BtnLoadImageFromFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Uri fileUri = new Uri(openFileDialog.FileName);
+                imageTest.Source = new BitmapImage(fileUri);
+            }
+        }
+
+        private void BtnLoadImageFromResource_Click(object sender, RoutedEventArgs e)
+        {
+            Uri resourceUri = new Uri("Resources/tiger.png", UriKind.Relative);
+            imageTest.Source = new BitmapImage(resourceUri);
         }
     }
 }
