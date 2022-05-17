@@ -330,8 +330,8 @@
             </StackPanel>
         </StackPanel>
 
-        <!-- Row 0 Column 1 : Image Controls With Stretch -->
-        <StackPanel Grid.Row="0" Grid.Column="1" Background="LightCyan" Margin="10 10 10 10">
+        <!-- Row 2 Column 1 : Image Controls With Stretch -->
+        <StackPanel Grid.Row="2" Grid.Column="1" Background="LightCyan" Margin="10 10 10 10">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -357,8 +357,8 @@
         <!-- Row 1 Column 1 : Image Controls -->
         <!-- The Image control ==> The WPF Image control will allow you to display images inside your applications. It's a very versatile control, with many useful options and methods, as you will learn in this article. But first, let's see the most basic example of including an image inside a Window:-->
         <StackPanel Grid.Row="1" Grid.Column="1" Height="200"  Margin="10 10 10 10"  Orientation="Horizontal" HorizontalAlignment="Center" >
-            <!--<Image Width="300" Source="/Resources/tiger_test.JPG" /> NEED TO DEBUG NOT SURE HOW TO GET IMAGE FROM PROJECT, IT NOT LOADING....-->
-            <Image Width="300"  Source="https://wpf-tutorial.com/Images/ArticleImages/1/basic-controls/image_control_basic_url.png" />
+            <Image Width="300" Source="{StaticResource imgCoffee}" /> 
+           <!-- <Image Width="300"  Source="https://wpf-tutorial.com/Images/ArticleImages/1/basic-controls/image_control_basic_url.png" />NEED TO DEBUG NOT SURE HOW TO GET IMAGE FROM PROJECT, IT NOT LOADING....-->
             <StackPanel HorizontalAlignment="Center" Background="LightCyan">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                     <Button Margin="10 10 10 10" Click="BtnLoadImageFromResource_Click">Load Image From Resource</Button>
@@ -411,6 +411,15 @@
                 <TextBox Margin="5" Name="txtLastName" />
                 <Button Content="_Save" Margin="20"></Button>
             </StackPanel>
+        </StackPanel>
+
+        <!-- Row 0 Column 1 : DataGrid -->
+        <StackPanel Grid.Row="0" Grid.Column="1" Height="200" Width="500" Margin="10 10 10 10"  HorizontalAlignment="Left"  Background="LightCyan">
+            <Button Margin="10 10 10 10" Click="BtnFetchDataGrid_Click">Fetch Data For Sample Data Grid</Button>
+            <Grid Margin="10">
+                <DataGrid Name="dgSimple"  Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                </DataGrid>
+            </Grid>
         </StackPanel>
     </Grid>
 </Window>

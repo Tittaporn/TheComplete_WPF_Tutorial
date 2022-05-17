@@ -21,6 +21,7 @@ namespace HelloWPF
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+  
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -175,7 +176,25 @@ namespace HelloWPF
         private void BtnLoadImageFromResource_Click(object sender, RoutedEventArgs e)
         {
             Uri resourceUri = new Uri("Resources/tiger.png", UriKind.Relative);
+            // Uri resourceUri = new Uri("Resources/tiger.png", UriKind.Relative);
             imageTest.Source = new BitmapImage(resourceUri);
+        }
+
+        private void BtnFetchDataGrid_Click(object sender, RoutedEventArgs e)
+        {
+            List<DataGridUserSample> users = new List<DataGridUserSample>();
+            users.Add(new DataGridUserSample() { Id = 1, Name = "John Doe", Birthday = new DateTime(1971, 7, 23) });
+            users.Add(new DataGridUserSample() { Id = 2, Name = "Jane Doe", Birthday = new DateTime(1974, 1, 17) });
+            users.Add(new DataGridUserSample() { Id = 3, Name = "Sammy Doe", Birthday = new DateTime(1991, 9, 2) });
+            users.Add(new DataGridUserSample() { Id = 4, Name = "Lee McCormick", Birthday = new DateTime(1989, 12, 10) });
+            dgSimple.ItemsSource = users;
+        }
+
+        public class DataGridUserSample
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public DateTime Birthday { get; set; }
         }
     }
 }

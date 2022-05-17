@@ -8,8 +8,15 @@
     
     <Application.Resources>
         <!-- If you need the ability to access the resource from several windows, this is possible as well. The App.xaml file can contain resources just like the window and any kind of WPF control, and when you store them in App.xaml, they are globally accessible in all of windows and user controls of the project. It works exactly the same way as when storing and using from a Window: -->
-        <sys:String x:Key="strApp">Hello, WPF Application World!</sys:String>
-        <sys:String x:Key="strHelloWorld">Hello WPF in Lee World !</sys:String>
+     <!--   <sys:String x:Key="strApp">Hello, WPF Application World!</sys:String>
+        <sys:String x:Key="strHelloWorld">Hello WPF in Lee World !</sys:String> -->
+
+        <ResourceDictionary>
+            <sys:String x:Key="strApp">Hello, WPF Application World!</sys:String>
+            <sys:String x:Key="strHelloWorld">Hello WPF in Lee World !</sys:String>
+            <BitmapImage x:Key="imgCoffee" UriSource="C:\Users\lmccormick\Desktop\XAML\HelloWPF\HelloWPF\Assets\coffeeCup.png"> </BitmapImage>
+            <BitmapImage x:Key="imgTiger" UriSource="/Assets\tiger.png"></BitmapImage>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
     
